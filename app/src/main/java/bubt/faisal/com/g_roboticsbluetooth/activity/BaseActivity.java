@@ -28,13 +28,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     public static final int MESSAGE_DEVICE_NAME = 4;
     public static final int MESSAGE_TOAST = 5;
     public String loc="";
-    BluetoothAdapter btAdapter;
+    public BluetoothAdapter btAdapter;
 
     private static final String SAVED_PENDING_REQUEST_ENABLE_BT = "PENDING_REQUEST_ENABLE_BT";
     // do not resend request to enable Bluetooth
     // if there is a request already in progress
     // See: https://code.google.com/p/android/issues/detail?id=24931#c1
-    boolean pendingRequestEnableBt = false;
+    public boolean pendingRequestEnableBt = false;
     // ==========================================================================
 
     @Override
