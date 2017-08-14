@@ -1,5 +1,6 @@
 package bubt.faisal.com.g_roboticsbluetooth;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
@@ -84,6 +85,28 @@ public class MainActivity extends BaseActivity {
         Intent serverIntent = new Intent(this, DeviceListActivity.class);
         startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_CONNECT_DEVICE:
+                // When DeviceListActivity returns with a device to connect
+                if (resultCode == Activity.RESULT_OK) {
+                    String address = data.getStringExtra(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+                    BluetoothDevice device = btAdapter.getRemoteDevice(address);
+                    if (super.isAdapterReady() && (connector == null)) setupConnector(device);
+                }
+                break;
+            case REQUEST_ENABLE_BT:
+                // When the request to enable Bluetooth returns
+                super.pendingRequestEnableBt = false;
+                if (resultCode != Activity.RESULT_OK) {
+                    Utils.log("BT not enabled");
+                }
+                break;
+        }
+    }
+    // ==========================================================================
     private void setupConnector(BluetoothDevice connectedDevice) {
         stopConnection();
         try {
