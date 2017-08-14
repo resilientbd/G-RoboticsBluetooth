@@ -34,6 +34,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -149,6 +150,7 @@ public class DeviceListActivity extends AppCompatActivity {
             if (info != null) {
                 // TODO this is not so cool...
                 CharSequence address = info.toString().substring(info.length() - 17);
+                Toast.makeText(getBaseContext(),"Device Address: "+address,Toast.LENGTH_LONG).show();
                 Intent intent = new Intent();
                 intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
 
@@ -175,7 +177,7 @@ public class DeviceListActivity extends AppCompatActivity {
                         mNewDevicesArrayAdapter.add(name + '\n' + device.getAddress());
                     }
                 } else {
-                    Log.e(TAG, "Could not get parcelable extra from device: " + BluetoothDevice.EXTRA_DEVICE);
+                    Log.d(TAG, "Could not get parcelable extra from device: " + BluetoothDevice.EXTRA_DEVICE);
                 }
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 setTitle(R.string.select_device);
