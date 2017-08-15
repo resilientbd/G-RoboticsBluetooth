@@ -42,9 +42,9 @@ public class MainActivity extends BaseActivity {
 
     private static final SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm:ss.SSS");
 
-    private static String MSG_NOT_CONNECTED;
-    private static String MSG_CONNECTING;
-    private static String MSG_CONNECTED;
+//    private static String MSG_NOT_CONNECTED;
+//    private static String MSG_CONNECTING;
+//    private static String MSG_CONNECTED;
 
     private static DeviceConnector connector;
     private static BluetoothResponseHandler mHandler;
@@ -58,13 +58,14 @@ public class MainActivity extends BaseActivity {
 
         if (mHandler == null) mHandler = new BluetoothResponseHandler(this);
         else mHandler.setTarget(this);
-        MSG_NOT_CONNECTED = getString(R.string.msg_not_connected);
-        MSG_CONNECTING = getString(R.string.msg_connecting);
-        MSG_CONNECTED = getString(R.string.msg_connected);
+//        MSG_NOT_CONNECTED = getString(R.string.msg_not_connected);
+//        MSG_CONNECTING = getString(R.string.msg_connecting);
+//        MSG_CONNECTED = getString(R.string.msg_connected);
 
         if (isConnected() && (savedInstanceState != null)) {
             setDeviceName(savedInstanceState.getString(DEVICE_NAME));
-        } else getSupportActionBar().setSubtitle(MSG_NOT_CONNECTED);
+        }
+        //else getSupportActionBar().setSubtitle(MSG_NOT_CONNECTED);
     }
     private void stopConnection() {
         if (connector != null) {
@@ -151,13 +152,13 @@ public class MainActivity extends BaseActivity {
                         final ActionBar bar = activity.getSupportActionBar();
                         switch (msg.arg1) {
                             case DeviceConnector.STATE_CONNECTED:
-                                bar.setSubtitle(MSG_CONNECTED);
+                                //bar.setSubtitle(MSG_CONNECTED);
                                 break;
                             case DeviceConnector.STATE_CONNECTING:
-                                bar.setSubtitle(MSG_CONNECTING);
+                              //  bar.setSubtitle(MSG_CONNECTING);
                                 break;
                             case DeviceConnector.STATE_NONE:
-                                bar.setSubtitle(MSG_NOT_CONNECTED);
+                              //  bar.setSubtitle(MSG_NOT_CONNECTED);
                                 break;
                         }
                         break;
